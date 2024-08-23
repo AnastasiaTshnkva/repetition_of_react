@@ -3,18 +3,14 @@ import '../src/styles/app.css';
 import PostsList from './components/PostList';
 import PostForm from './components/PostForm';
 import MySelect from './components/UI/select/MySelect';
+import MyInput from './components/UI/input/MyInput';
 
 function App() {
   const [posts, setPosts] = useState([
     {id: 1, title: 'JavaSctipt', body: 'Description'},
-    {id: 2, title: 'JavaSctipt 2', body: 'Description'},
-    {id: 3, title: 'JavaSctipt 3', body: 'Description'},
+    {id: 2, title: 'aa 2', body: 'ee'},
+    {id: 3, title: 'xx 3', body: 'bb'},
   ]);
-
-  const [selectedSort, setSelectedSort] = useState('');
-
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -26,15 +22,35 @@ function App() {
 
   const sortPosts = (sort) => {
     setSelectedSort(sort);
-    console.log(sort);
-
   }
+
+  const [selectedSort, setSelectedSort] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
+  function getSortedPosts () {
+    console.log('getSortingPosts started');
+    if (selectedSort) {
+      return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]));
+    }
+    return posts;
+  }
+
+  const sortedPosts = getSortedPosts();
 
   return (
     <div className='App'>
       <PostForm create={createPost}/>
       <hr style={{margin: '15px 0'}}/>
       <div>
+        <MyInput
+          placeholder='Search...'
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+        />
+
         <MySelect 
         value={selectedSort}
         onChange={sortPosts}
@@ -49,7 +65,7 @@ function App() {
       {
         posts.length !== 0 
           ? 
-          <PostsList remove={removePost} posts={posts} title='JS posts'/>
+          <PostsList remove={removePost} posts={sortedPosts} title='JS posts'/>
           : 
           <h1 style={{textAlign: 'center'}}>No posts yet</h1>
       }
