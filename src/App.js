@@ -14,7 +14,8 @@ function App() {
   ]);
 
   const createPost = (newPost) => {
-    setPosts([...posts, newPost])
+    setPosts([...posts, newPost]);
+    setModal(false);
   }
 
   const removePost = (post) => {
@@ -40,7 +41,7 @@ function App() {
     <div className='App'>
       <MyButton style={{marginTop: '30px'}} onClick={() => setModal(true)}>Add new post</MyButton>
       <MyModal visible={modal} setVisible={setModal}>
-      <PostForm create={createPost}/>
+        <PostForm create={createPost}/>
       </MyModal>
       <hr style={{margin: '15px 0'}}/>
       <PostFilter filter={filter} setFilter={setFilter}/>
