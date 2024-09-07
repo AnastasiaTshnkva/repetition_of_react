@@ -40,3 +40,33 @@
   transform: translateX(-350px);
   transition: all 500ms ease-in;
 }
+
+.error-block {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.error-block-header {
+  text-align: center;
+}
+
+.error-block-message {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.page__wrapper {
+  margin-top: 30px;
+  display: flex;
+}
+
+.page {
+  padding: 10px;
+  border: solid teal 1px;
+  cursor: pointer;
+}
+
+.page__current {
+  border: 3px orange solid;
+  font-weight: bold;
+}
